@@ -22,6 +22,7 @@ Partial Class Player
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Player))
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.btnInitAuto = New System.Windows.Forms.Button()
         Me.txtFilePath = New System.Windows.Forms.TextBox()
@@ -124,6 +125,7 @@ Partial Class Player
         Me.Controls.Add(Me.txtFilePath)
         Me.Controls.Add(Me.btnInitAuto)
         Me.Controls.Add(Me.DateTimePicker1)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Player"
         Me.Text = "音乐播放器"
         Me.ResumeLayout(False)
