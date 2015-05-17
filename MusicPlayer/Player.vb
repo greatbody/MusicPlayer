@@ -16,6 +16,10 @@ Public Class Player
     Private Sub btnInitAuto_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnInitAuto.Click
         Dim obj As New Object
         If btnInitAuto.Text = "启动" Then
+            '检测启动前的参数
+            If Not CheckCondition(txtFilePath.Text, DateTimePicker1.Value) Then
+                Exit Sub
+            End If
             If txtFilePath.Text.Length > 0 Then
                 _timedPlayer = New Audio(txtFilePath.Text)
                 '设置进度条
@@ -58,7 +62,7 @@ Public Class Player
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btnChooseFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnChooseFile.Click
-        txtFilePath.Text = FileSystem.SelectFiles("请选择一个音乐文件")
+        txtFilePath.Text = FileSystem.SelectFiles("请选择一个音乐文件", "音乐文件|*.mp3;*.wma")
     End Sub
     ''' <summary>
     ''' 窗口关闭前操作
@@ -86,7 +90,6 @@ Public Class Player
         Dim i As Integer = 0
         Dim volume As Integer = 0
 
-        BeginTime = BeginTime.AddSeconds(_timedPlayer.Length / 1000 * -1)
         While True
             Application.DoEvents()
             Thread.Sleep(PosInterver)
@@ -142,5 +145,21 @@ Public Class Player
     End Sub
 #End Region
 
+#Region "公共函数"
+    Public Function CheckCondition(ByVal filepath As String, ByVal begindate As String) As Boolean
+        If Not IO.File.Exists(filepath) Then
+            MsgBox("文件不存在！")
+            Return False
+        End If
+
+        If begindate < Now Then
+            MsgBox("预计开始时间必须大于当前时间！")
+            Return False
+        End If
+
+        Return True
+    End Function
+
+#End Region
 
 End Class

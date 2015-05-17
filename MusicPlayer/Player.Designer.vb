@@ -82,7 +82,7 @@ Partial Class Player
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(77, 12)
         Me.Label1.TabIndex = 6
-        Me.Label1.Text = "播放结束时间"
+        Me.Label1.Text = "播放开始时间"
         '
         'lblPosition
         '
